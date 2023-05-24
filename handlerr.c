@@ -30,7 +30,7 @@ void _printnum(int n)
 }
 
 /**
- * handle_sigint - handle_sigint
+ * handle_sigint - handle_ sigint
  *
  * Return: nothing
  */
