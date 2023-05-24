@@ -16,7 +16,7 @@ int _strlen(const char *s)
 }
 
 /**
-  * _strcpy -a function that Copies a string
+  * _strcpy - a function that Copies a string
   * @dest: Destination value
   * @src: Source value
   *
