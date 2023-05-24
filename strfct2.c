@@ -38,7 +38,7 @@ int _strncmp(const char *s1, const char *s2, int n)
 }
 
 /**
- * _strcat - a function that concatenates two strings.
+ * _strcat -  function that concatenates two strings.
  * @dest: an input string
  * @src: an input string
  * Return: A pointer to the resulting string
