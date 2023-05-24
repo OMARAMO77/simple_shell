@@ -42,7 +42,7 @@ void handle_sigint(void)
 }
 
 /**
- * errmsg - aa
+ * errmsg - read error msg
  * @hsh: aa
  * @cmdnum: aa
  * @cmd: aa
