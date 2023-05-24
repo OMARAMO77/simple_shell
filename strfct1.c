@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
-  * _strlen -  length of a string
+  * _strlen - length of a string
   * @s: String to count
   *
   * Return: String length
