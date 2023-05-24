@@ -18,7 +18,8 @@ int _strcmp(const char *s1, const char *s2)
 }
 
 /**
- * _strncmp  compares first n characters of two strings
+ * _strncmp -
+ * compares first n characters of two strings
  * @s1: a string
  * @s2: a string
  * @n: number of characters to compare
