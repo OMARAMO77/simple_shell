@@ -26,11 +26,10 @@ void prompt(void)
  *
  * Return: aa
  */
-int contloop = 1;
 
 int main(int argc, char **argv, char **env)
 {
-	int i, status, cmdnum = 0;
+	int i, cmdnum = 0;
 	char *retcmd, *path, *cmd = NULL;
 	size_t buffSize = 0;
 	ssize_t bytesRead;
@@ -40,30 +39,22 @@ int main(int argc, char **argv, char **env)
 	signal(SIGINT, handle_sigint);
 	if (argc == 1)
 	{
-		while (contloop)
+		while (1)
 		{
 			prompt();
 			bytesRead = getline(&cmd, &buffSize, stdin);
 			if (bytesRead == -1)
 			{
-				if (feof(stdin))
-				{
-					write(STDOUT_FILENO, "\n", 1);
+				if (errno == EOF)
 					break;
-				}
 				else
-				{
-					write(STDOUT_FILENO, "\n", 1);
 					break;
-				}
 			}
-			if (_strncmp(cmd, "exit", 4) == 0)
-			{
-				status = extcmd(cmd, bytesRead);
-				
-				exit(status);
-			}
+			if (_strcmp(cmd, "exit\n") == 0)
+				break;
 			cmdnum++;
+			if (_strncmp(cmd, "\n", 1) == 0)
+				continue;
 			retcmd = exe_cmd(cmd);
 			if (retcmd != NULL)
 				errmsg(argv[0], cmdnum, retcmd);
