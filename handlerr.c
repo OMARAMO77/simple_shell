@@ -10,7 +10,7 @@
 int extcmd(char *cmd, ssize_t bytesRead)
 {
 	int status;
-	
+
 	if (cmd[bytesRead - 1] == '\n')
 		cmd[bytesRead - 1] = '\0';
 
@@ -22,7 +22,7 @@ int extcmd(char *cmd, ssize_t bytesRead)
 		status = _atoi(cmd + 5);
 		return (status);
 	}
-	
+
 	return (0);
 }
 /**
