@@ -51,21 +51,20 @@ int main(int argc, char **argv, char **env)
 				else
 					break;
 			}
+			signal(SIGINT, handle_sigint);
 			if (emp_str(cmd))
 				continue;
-			if (_strcmp(cmd, "exit\n") == 0)
+			else if (_strcmp(cmd, "exit\n") == 0)
 				exit(0);
-			if (_strncmp(cmd, "exit ", 5) == 0)
+			else if (_strncmp(cmd, "exit ", 5) == 0)
 			{
 				status = _atoi(cmd + 5);
 				exit(status);
 			}
-			if (_strncmp(cmd, "\n", 1) == 0)
-				continue;
-			retcmd = exe_cmd(cmd);
-			if (retcmd != NULL)
+			else if ((retcmd = exe_cmd(cmd)) != NULL)
 				errmsg(argv[0], cmdnum, retcmd);
 		}
+		free(cmd);
 	}
 	else
 	{
@@ -84,6 +83,5 @@ int main(int argc, char **argv, char **env)
 			}
 		}
 	}
-	free(cmd);
 	return (0);
 }
