@@ -29,7 +29,6 @@ int _strncmp(const char *s1, const char *s2, int n);
 int _strcmp(const char *s1, const char *s2);
 char *exe_cmd(char *cmd);
 void errmsg(char *hsh, int cmdnum, char *cmd);
-void _printnum(int n);
 int _atoi(char *s);
 int empty(char ch);
 int emp_str(char *cmd);
