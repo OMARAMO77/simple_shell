@@ -42,6 +42,7 @@ int main(int argc, char **argv, char **env)
 		while (1)
 		{
 			prompt();
+			cmdnum++;
 			bytesRead = getline(&cmd, &buffSize, stdin);
 			if (bytesRead == -1)
 			{
@@ -50,6 +51,8 @@ int main(int argc, char **argv, char **env)
 				else
 					break;
 			}
+			if (emp_str(cmd))
+				continue;
 			if (_strcmp(cmd, "exit\n") == 0)
 				exit(0);
 			if (_strncmp(cmd, "exit ", 5) == 0)
@@ -57,8 +60,6 @@ int main(int argc, char **argv, char **env)
 				status = _atoi(cmd + 5);
 				exit(status);
 			}
-
-			cmdnum++;
 			if (_strncmp(cmd, "\n", 1) == 0)
 				continue;
 			retcmd = exe_cmd(cmd);
