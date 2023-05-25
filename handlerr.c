@@ -12,22 +12,6 @@ int _putchar(char c)
 	return (write(1, &c, 1));
 }
 
-/**
-  * _printnum - Prints an integer
-  * @n: Number to print
-  *
-  * Return: Nothing
-  */
-
-void _printnum(int n)
-{
-	unsigned int x;
-
-	x = n;
-	if (x / 10)
-		_printnum(n / 10);
-	_putchar(n % 10 + '0');
-}
 
 /**
  * handle_sigint - handle_sigint
@@ -49,14 +33,56 @@ void handle_sigint(void)
  *
  * Return: aa
  */
+#include "shell.h"
+
+/**
+ * errmsg - aa
+ * @hsh: aa
+ * @cmdnum: aa
+ * @cmd: aa
+ *
+ * Return: aa
+ */
+
+/**
+ * errmsg - aa
+ * @hsh: aa
+ * @cmdnum: aa
+ * @cmd: aa
+ *
+ * Return: aa
+ */
 
 void errmsg(char *hsh, int cmdnum, char *cmd)
 {
-	write(STDOUT_FILENO, hsh, strlen(hsh));
-	write(STDOUT_FILENO, ": ", 2);
-	_printnum(cmdnum);
-	write(STDOUT_FILENO, ": ", 2);
-	write(STDOUT_FILENO, cmd, _strlen(cmd));
-	write(STDOUT_FILENO, ": not found\n", 12);
+	char num1, num2, num3;
+
+	write(STDERR_FILENO, hsh, _strlen(hsh));
+	write(STDERR_FILENO, ": ", 2);
+	if (cmdnum < 10)
+	{
+		num1 = cmdnum + '0';
+		write(STDERR_FILENO, &num1, 1);
+	}
+	else if (cmdnum > 9 && cmdnum < 100)
+	{
+		num1 = (cmdnum / 10) + '0';
+		num2 = (cmdnum % 10) + '0';
+		write(STDERR_FILENO, &num1, 1);
+		write(STDERR_FILENO, &num2, 1);
+	}
+	else if (cmdnum > 99)
+	{
+		num1 = (cmdnum / 100) + '0';
+		num2 = ((cmdnum / 10) % 10) + '0';
+		num3 = (cmdnum % 10) + '0';
+		write(STDERR_FILENO, &num1, 1);
+		write(STDERR_FILENO, &num2, 1);
+		write(STDERR_FILENO, &num3, 1);
+	}
+	
+	write(STDERR_FILENO, ": ", 2);
+	write(STDERR_FILENO, cmd, _strlen(cmd));
+	write(STDERR_FILENO, ": not found\n", 12);
 
 }
