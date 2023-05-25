@@ -1,27 +1,3 @@
-#include "shell.h"
-
-/**
- * prompt - prompt
- *
- * Return: nothing
- */
-
-void prompt(void)
-{
-	int interactive_mode;
-
-	interactive_mode = isatty(STDIN_FILENO);
-	if (interactive_mode)
-	{
-		write(STDOUT_FILENO, "#cisfun$ ", 9);
-		fflush(stdout);
-	}
-}
-
-/**
- * main - aa
- * @argc: aa
- * @argv: aa
  * @env: aa
  *
  * Return: aa
@@ -64,23 +40,6 @@ int main(int argc, char **argv, char **env)
 			retcmd = exe_cmd(cmd);
 			if (retcmd != NULL)
 				errmsg(argv[0], cmdnum, retcmd);
-		}
-	}
-	else
-	{
-		for (i = 1; i < argc; i++)
-		{
-			_strncpy(buffer, argv[i], sizeof(buffer) - 1);
-			buffer[sizeof(buffer) - 1] = '\0'; /* Ensure null-termination of buffer */
-			if (check_path(buffer, '/'))
-				path = buffer;
-			else
-				path = path_to(buffer);
-
-			if (execve(path, argv + 1, env) == -1)
-			{
-				perror("execve2 error");
-			}
 		}
 	}
 	free(cmd);
