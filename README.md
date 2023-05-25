@@ -29,3 +29,8 @@ execve will be the core part of your Shell, don’t forget to pass the environ t
 
 Simple shell 0.1 +
 Handle command lines with arguments
+3. Simple shell 0.3
+Simple shell 0.2 +
+
+Handle the PATH
+fork must not be called if the command doesn’t exist
