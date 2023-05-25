@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
-  * _strlen - length of a string
+  * _strlen - Returns the length of a string
   * @s: String to count
   *
   * Return: String length
@@ -16,7 +16,7 @@ int _strlen(const char *s)
 }
 
 /**
-  * _strcpy - a function that Copies a string
+  * _strcpy - Copies a string
   * @dest: Destination value
   * @src: Source value
   *
@@ -33,7 +33,7 @@ char *_strcpy(char *dest, char *src)
 }
 
 /**
- * _strncpy - copys the strings.
+ * _strncpy - a function that copys the strings.
  * @dest: a string
  * @src: a string
  * @n: an integer
@@ -57,4 +57,40 @@ char *_strncpy(char *dest, char *src, int n)
 		a++;
 	}
 	return (dest);
+}
+
+/**
+ * empty - aa
+ * @ch: aa
+ *
+ * Return: aa
+ */
+
+int empty(char ch)
+{
+    if (ch == ' ' || ch == '\t' || ch == '\n')
+    {
+        return 1;
+    }
+    return 0;
+}
+
+/**
+ * emp_str - aa
+ * @cmd: aa
+ *
+ * Return: aa
+ */
+
+int emp_str(char *cmd)
+{
+    int mul = 1, a = 0, ret;
+
+    while (cmd[a])
+    {
+        ret = empty(cmd[a]);
+        mul *= ret;
+        a++;
+    }
+    return mul;
 }
