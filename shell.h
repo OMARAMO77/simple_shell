@@ -12,11 +12,13 @@
 #include <signal.h>
 
 extern char **environ;
+extern int contloop;
+
 
 int main(int argc, char **argv, char **env);
 int _putchar(char c);
 void prompt(void);
-void handle_sigint();	/*betty*/
+void handle_sigint();	/* don't change it for betty */
 char *_strncpy(char *dest, char *src, int n);
 char *path_to(const char *filename);
 int check_path(const char *command, char ch);
@@ -29,5 +31,7 @@ int _strcmp(const char *s1, const char *s2);
 char *exe_cmd(char *cmd);
 void errmsg(char *hsh, int cmdnum, char *cmd);
 void _printnum(int n);
+int _atoi(char *s);
+int extcmd(char *cmd, ssize_t bytesRead);
 
 #endif
