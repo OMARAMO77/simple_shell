@@ -29,7 +29,7 @@ void prompt(void)
 
 int main(int argc, char **argv, char **env)
 {
-	int i, cmdnum = 0;
+	int i, status, cmdnum = 0;
 	char *retcmd, *path, *cmd = NULL;
 	size_t buffSize = 0;
 	ssize_t bytesRead;
