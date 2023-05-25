@@ -64,7 +64,6 @@ int main(int argc, char **argv, char **env)
 			else if ((retcmd = exe_cmd(cmd)) != NULL)
 				errmsg(argv[0], cmdnum, retcmd);
 		}
-		free(cmd);
 	}
 	else
 	{
@@ -83,5 +82,6 @@ int main(int argc, char **argv, char **env)
 			}
 		}
 	}
+	free(cmd);
 	return (0);
 }
