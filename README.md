@@ -41,4 +41,8 @@ Simple shell 0.3 +
 Implement the exit built-in, that exits the shell
 Usage: exit
 You don’t have to handle any argument to the built-in exit
+5. Simple shell 1.0
+Simple shell 0.4 +
+
+Implement the env built-in, that prints the current environment
 
