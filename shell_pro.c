@@ -50,7 +50,7 @@ int main(int argc, char **argv, char **env)
 				else
 					break;
 			}
-			if (_strcmp(cmd, "exit\n") == 0)
+			if (_strncmp(cmd, "exit\n", 4) == 0)
 				break;
 			cmdnum++;
 			if (_strncmp(cmd, "\n", 1) == 0)
