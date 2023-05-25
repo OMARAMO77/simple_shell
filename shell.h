@@ -31,6 +31,8 @@ char *exe_cmd(char *cmd);
 void errmsg(char *hsh, int cmdnum, char *cmd);
 void _printnum(int n);
 int _atoi(char *s);
+int empty(char ch);
+int emp_str(char *cmd);
 
 
 #endif
