@@ -19,12 +19,12 @@ void prompt(void)
 }
 
 /**
- * main - aa
- * @argc: aa
- * @argv: aa
+ * main - main
+ * @argc: argument counter
+ * @argv: argument vector
  * @env: aa
  *
- * Return: aa
+ * Return: 0 on success
  */
 
 int main(int argc, char **argv, char **env)
