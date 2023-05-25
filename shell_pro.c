@@ -52,6 +52,12 @@ int main(int argc, char **argv, char **env)
 			}
 			if (_strcmp(cmd, "exit\n") == 0)
 				exit(0);
+			if (_strncmp(cmd, "exit ", 5) == 0)
+			{
+				status = _atoi(cmd + 5);
+				exit(status);
+			}
+
 			cmdnum++;
 			if (_strncmp(cmd, "\n", 1) == 0)
 				continue;
