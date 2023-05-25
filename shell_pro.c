@@ -29,7 +29,7 @@ void prompt(void)
 
 int main(int argc, char **argv, char **env)
 {
-	int i, status, cmdnum = 0;
+	int i, cmdnum = 0;
 	char *retcmd, *path, *cmd = NULL;
 	size_t buffSize = 0;
 	ssize_t bytesRead;
@@ -50,17 +50,14 @@ int main(int argc, char **argv, char **env)
 				else
 					break;
 			}
-			if (_strncmp(cmd, "exit", 4) == 0)
+			if (_strcmp(cmd, "exit\n") == 0)
+				exit(0);
+			if (_strncmp(cmd, "exit ", 5) == 0)
 			{
-				if (_strcmp(cmd, "exit\n") == 0)
-					exit(0);
-
-				if (_strncmp(cmd, "exit ", 5) == 0)
-				{
-					status = _atoi(cmd + 5);
-					exit(status);
-				}
+				status = _atoi(cmd + 5);
+				exit(status);
 			}
+
 			cmdnum++;
 			if (_strncmp(cmd, "\n", 1) == 0)
 				continue;
