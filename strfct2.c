@@ -1,7 +1,46 @@
 #include "shell.h"
 
 /**
- * _strcmp - compares two strings.
+ * _atoi - Convert a string to an integer.
+ * @s: The pointer to convert
+ *
+ * Return: A integer
+ */
+int _atoi(char *s)
+{
+	int n = 0;
+	unsigned int ni = 0;
+	int min = 1;
+	int isi = 0;
+
+	while (s[n])
+	{
+		if (s[n] == 45)
+		{
+			min *= -1;
+		}
+
+		while (s[n] >= 48 && s[n] <= 57)
+		{
+			isi = 1;
+			ni = (ni * 10) + (s[n] - '0');
+			n++;
+		}
+
+		if (isi == 1)
+		{
+			break;
+		}
+
+		n++;
+	}
+
+	ni *= min;
+	return (ni);
+}
+
+/**
+ * _strcmp - a function that compares two strings.
  * @s1: a string
  * @s2: a string
  * Return: The difference s1 - s2
@@ -18,8 +57,7 @@ int _strcmp(const char *s1, const char *s2)
 }
 
 /**
- * _strncmp -
- * compares first n characters of two strings
+ * _strncmp - compares the first n characters of two strings
  * @s1: a string
  * @s2: a string
  * @n: number of characters to compare
@@ -39,7 +77,7 @@ int _strncmp(const char *s1, const char *s2, int n)
 }
 
 /**
- * _strcat -  function that concatenates two strings.
+ * _strcat - a function that concatenates two strings.
  * @dest: an input string
  * @src: an input string
  * Return: A pointer to the resulting string
