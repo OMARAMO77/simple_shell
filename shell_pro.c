@@ -19,7 +19,7 @@ void prompt(void)
 }
 
 /**
- * main - main fct
+ * main - main function
  * @argc: argument counter
  * @argv: argument vector
  * @env: aa
