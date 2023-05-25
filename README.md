@@ -1,1 +1,1 @@
-simple UNIX command interpreter done by Omar ACHKIR and Annacolleta Mtetwa
+simple UNIX command interpreter project done by Omar ACHKIR and Annacolleta Mtetwa
