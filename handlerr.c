@@ -1,31 +1,6 @@
 #include "shell.h"
 
 /**
-  * extcmd - aa
-  * @cmd: aa
-  * @bytesRead: aa
-  *
-  * Return: aa
-  */
-int extcmd(char *cmd, ssize_t bytesRead)
-{
-	int status;
-
-	if (cmd[bytesRead - 1] == '\n')
-		cmd[bytesRead - 1] = '\0';
-
-	if (_strcmp(cmd, "exit") == 0)
-		return (0);
-
-	if (_strncmp(cmd, "exit ", 5) == 0)
-	{
-		status = _atoi(cmd + 5);
-		return (status);
-	}
-
-	return (0);
-}
-/**
  * _putchar - writes the character c to stdout
  * @c: The character to print
  *
@@ -59,11 +34,11 @@ void _printnum(int n)
  *
  * Return: nothing
  */
+
 void handle_sigint(void)
 {
-	write(STDOUT_FILENO, "\n#cisfun$ ", 10);
-	fflush(stdout);
-	contloop = 1;
+	_putchar(10);
+	exit(0);
 }
 
 /**
