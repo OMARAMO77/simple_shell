@@ -33,25 +33,6 @@ void handle_sigint(void)
  *
  * Return: aa
  */
-#include "shell.h"
-
-/**
- * errmsg - aa
- * @hsh: aa
- * @cmdnum: aa
- * @cmd: aa
- *
- * Return: aa
- */
-
-/**
- * errmsg - aa
- * @hsh: aa
- * @cmdnum: aa
- * @cmd: aa
- *
- * Return: aa
- */
 
 void errmsg(char *hsh, int cmdnum, char *cmd)
 {
@@ -80,7 +61,7 @@ void errmsg(char *hsh, int cmdnum, char *cmd)
 		write(STDERR_FILENO, &num2, 1);
 		write(STDERR_FILENO, &num3, 1);
 	}
-	
+
 	write(STDERR_FILENO, ": ", 2);
 	write(STDERR_FILENO, cmd, _strlen(cmd));
 	write(STDERR_FILENO, ": not found\n", 12);
