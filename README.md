@@ -104,4 +104,8 @@ Handle variables replacement
 Handle the $? variable
 Handle the $$ variable
 
+15. Comments
+Simple shell 1.0 +
+Handle comments (#)
+
 
