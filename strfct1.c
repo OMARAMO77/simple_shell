@@ -68,11 +68,11 @@ char *_strncpy(char *dest, char *src, int n)
 
 int empty(char ch)
 {
-    if (ch == ' ' || ch == '\t' || ch == '\n')
-    {
-        return 1;
-    }
-    return 0;
+	if (ch == ' ' || ch == '\t' || ch == '\n')
+	{
+		return (1);
+	}
+	return (0);
 }
 
 /**
@@ -84,13 +84,13 @@ int empty(char ch)
 
 int emp_str(char *cmd)
 {
-    int mul = 1, a = 0, ret;
+	int mul = 1, a = 0, ret;
 
-    while (cmd[a])
-    {
-        ret = empty(cmd[a]);
-        mul *= ret;
-        a++;
-    }
-    return mul;
+	while (cmd[a])
+	{
+		ret = empty(cmd[a]);
+		mul *= ret;
+		a++;
+	}
+	return (mul);
 }
