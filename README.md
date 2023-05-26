@@ -1,4 +1,4 @@
-simple_shell:wq
+simple_shellwq
 UNIX command interpreter project done by Omar ACHKIR and Annacolleta Mtetwa
 
 Tasks
