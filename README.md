@@ -1,5 +1,6 @@
-simple_shellwq
-UNIX command interpreter project done by Omar ACHKIR and Annacolleta Mtetwa
+simple_shell  project done by Omar ACHKIR and Annacolleta Mtetwa
+
+Simple UNIX command interpreter
 
 Tasks
 0. Betty would be proud
@@ -8,6 +9,7 @@ Write a beautiful code that passes the Betty checks
 1. Simple shell 0.1
 Write a UNIX command line interpreter.
 Usage: simple_shell
+
 Shell should:
 Display a prompt and wait for the user to type a command. A command line always ends with a new line.
 The prompt is displayed again each time a command has been executed.
