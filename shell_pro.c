@@ -1,12 +1,31 @@
 #include "shell.h"
 
+void exithsh(char *cmd);
+void envcmd(void);
+void errmsg2(char *hsh, int cmdnum, char *cmd, char *status);
+
+void errmsg2(char *hsh, int cmdnum, char *cmd, char *status)
+{
+	char num1;
+
+	write(STDERR_FILENO, hsh, _strlen(hsh));
+	write(STDERR_FILENO, ": ", 2);
+	if (cmdnum < 10)
+	{
+		num1 = cmdnum + '0';
+		write(STDERR_FILENO, &num1, 1);
+	}	
+	write(STDERR_FILENO, ": ", 2);
+	write(STDERR_FILENO, cmd, _strlen(cmd));
+	write(STDERR_FILENO, ": Illegal number: ", 18);
+	write(STDERR_FILENO, status, _strlen(status));
+}
+
 /**
  * envcmd - aa
  *
  * Return: aa
  */
-
-void envcmd(void);
 void envcmd(void)
 {
 	int i = 0;
@@ -17,6 +36,30 @@ void envcmd(void)
 		write(STDOUT_FILENO, env[i], _strlen(env[i]));
 		write(STDOUT_FILENO, "\n", 1);
 		i++;
+	}
+}
+/**
+ * exithsh - handles exit command
+ * @cmd: Command string
+ *
+ * Return: nothing
+ */
+void exithsh(char *cmd)
+{
+	int status;
+
+	if (_strcmp(cmd, "exit\n") == 0)
+		exit(0);
+	else if (_strncmp(cmd, "exit ", 5) == 0)
+	{
+		status = _atoi(cmd + 5);
+		if (status == 0)
+		{
+			errmsg2("./hsh", 1, "exit", cmd + 5);
+			return;
+		}
+		else
+			exit(status);
 	}
 }
 
@@ -49,7 +92,7 @@ void prompt(void)
 
 int main(int argc, char **argv, char **env)
 {
-	int i, status, cmdnum = 0;
+	int i, cmdnum = 0;
 	char *retcmd, *path, *cmd = NULL;
 	size_t buffSize = 0;
 	ssize_t bytesRead;
@@ -73,12 +116,10 @@ int main(int argc, char **argv, char **env)
 			}
 			else if (emp_str(cmd))
 				continue;
-			else if (_strcmp(cmd, "exit\n") == 0)
-				_exit(0);
-			else if (_strncmp(cmd, "exit ", 5) == 0)
+			else if (_strncmp(cmd, "exit ", 5) == 0 ||_strcmp(cmd, "exit\n") == 0)
 			{
-				status = _atoi(cmd + 5);
-				_exit(status);
+				exithsh(cmd);
+				break;
 			}
 			retcmd = exe_cmd(cmd);
 			if (retcmd != NULL)
