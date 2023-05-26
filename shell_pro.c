@@ -47,9 +47,9 @@ int main(int argc, char **argv, char **env)
 			if (bytesRead == -1)
 			{
 				if (errno == EOF)
-					break;
+					_exit(0);
 				else
-					break;
+					_exit(0);
 			}
 			else if (_strcmp(cmd, "env\n") == 0)
 			{
@@ -65,13 +65,14 @@ int main(int argc, char **argv, char **env)
 			if (emp_str(cmd))
 				continue;
 			else if (_strcmp(cmd, "exit\n") == 0)
-				exit(0);
+				break;
 			else if (_strncmp(cmd, "exit ", 5) == 0)
 			{
 				status = _atoi(cmd + 5);
 				exit(status);
 			}
-			else if ((retcmd = exe_cmd(cmd)) != NULL)
+			retcmd = exe_cmd(cmd);
+			if (retcmd != NULL)
 				errmsg(argv[0], cmdnum, retcmd);
 		}
 	}
