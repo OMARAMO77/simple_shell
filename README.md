@@ -1,5 +1,5 @@
 simple_shell:wq
- UNIX command interpreter project done by Omar ACHKIR and Annacolleta Mtetwa
+UNIX command interpreter project done by Omar ACHKIR and Annacolleta Mtetwa
 
 Tasks
 0. Betty would be proud
