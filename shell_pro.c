@@ -1,6 +1,26 @@
 #include "shell.h"
 
 /**
+ * envcmd - aa
+ *
+ * Return: aa
+ */
+
+void envcmd(void);
+void envcmd(void)
+{
+	int i = 0;
+	char **env = environ;
+
+	while (env[i] != NULL)
+	{
+		write(STDOUT_FILENO, env[i], _strlen(env[i]));
+		write(STDOUT_FILENO, "\n", 1);
+		i++;
+	}
+}
+
+/**
  * prompt - prompt
  *
  * Return: nothing
@@ -45,31 +65,20 @@ int main(int argc, char **argv, char **env)
 			cmdnum++;
 			bytesRead = getline(&cmd, &buffSize, stdin);
 			if (bytesRead == -1)
-			{
-				if (errno == EOF)
-					_exit(0);
-				else
-					_exit(0);
-			}
+				break;
 			else if (_strcmp(cmd, "env\n") == 0)
 			{
-				i = 0;
-				while (env[i] != NULL)
-				{
-					write(STDOUT_FILENO, env[i], _strlen(env[i]));
-					write(STDOUT_FILENO, "\n", 1);
-					i++;
-				}
+				envcmd();
 				continue;
 			}
-			if (emp_str(cmd))
+			else if (emp_str(cmd))
 				continue;
 			else if (_strcmp(cmd, "exit\n") == 0)
-				break;
+				_exit(0);
 			else if (_strncmp(cmd, "exit ", 5) == 0)
 			{
 				status = _atoi(cmd + 5);
-				exit(status);
+				_exit(status);
 			}
 			retcmd = exe_cmd(cmd);
 			if (retcmd != NULL)
