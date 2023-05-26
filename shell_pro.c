@@ -51,7 +51,17 @@ int main(int argc, char **argv, char **env)
 				else
 					break;
 			}
-			signal(SIGINT, handle_sigint);
+			else if (_strcmp(cmd, "env\n") == 0)
+			{
+				i = 0;
+				while (env[i] != NULL)
+				{
+					write(STDOUT_FILENO, env[i], _strlen(env[i]));
+					write(STDOUT_FILENO, "\n", 1);
+					i++;
+				}
+				continue;
+			}
 			if (emp_str(cmd))
 				continue;
 			else if (_strcmp(cmd, "exit\n") == 0)
