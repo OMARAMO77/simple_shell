@@ -86,4 +86,8 @@ man chdir, man getcwd
 Simple shell 1.0 +
 Handle the commands separator ;
 
+12. && and ||
+Simple shell 1.0 +
+Handle the && and || shell logical operators
+
 
