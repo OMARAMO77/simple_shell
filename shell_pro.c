@@ -13,12 +13,10 @@ void semcolexe(char *cmd)
 {
 	char *tok;
 	pid_t pid;
-	char *path, *delimiter = " ;";
+	char *delimiter = ";";
 	size_t len;
 	char *args[14];
-	char **env;
 
-	env = environ;
 	len = strlen(cmd);
 	if (len > 0 && cmd[len - 1] == '\n')
 		cmd[len - 1] = '\0';
@@ -35,14 +33,7 @@ void semcolexe(char *cmd)
 		{
 			args[0] = tok;
 			args[1] = NULL;
-			if (check_path(args[0], '/'))
-				path = args[0];
-			else
-				path = path_to(args[0]);
-			if (access(path, X_OK) == 0)
-				execve(path, args, env);
-			else
-				errmsg("./hsh", 1, tok);
+			exe_cmd(args[0]);
 		}
 		else
 			wait(NULL);
