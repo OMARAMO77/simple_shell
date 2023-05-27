@@ -1,5 +1,4 @@
 #include "shell.h"
-void exithsh(char *cmd);
 void envcmd(void);
 void errmsg2(char *hsh, int cmdnum, char *cmd, char *status);
 /**
@@ -45,26 +44,6 @@ void envcmd(void)
 	}
 }
 /**
- * exithsh - handles exit command
- * @cmd: Command string
- *
- * Return: nothing
- */
-void exithsh(char *cmd)
-{
-	int status;
-
-	status = _atoi(cmd + 5);
-	if (status == 0)
-	{
-		errmsg2("./hsh", 1, "exit", cmd + 5);
-		exit(2);
-	}
-	else
-		exit(status);
-}
-
-/**
  * prompt - prompt
  *
  * Return: nothing
@@ -93,7 +72,7 @@ void prompt(void)
 
 int main(int argc, char **argv, char **env)
 {
-	int i, cmdnum = 0;
+	int i, cmdnum = 0, status;
 	char *retcmd, *path, *cmd = NULL;
 	size_t buffSize = 0;
 	ssize_t bytesRead;
@@ -121,8 +100,14 @@ int main(int argc, char **argv, char **env)
 				break;
 			else if (_strncmp(cmd, "exit ", 5) == 0)
 			{
-				exithsh(cmd);
-				break;
+				status = _atoi(cmd + 5);
+				if (status == 0)
+				{
+					errmsg2(argv[0], cmdnum, "exit", cmd + 5);
+					exit(2);
+				}
+				else
+					exit(status);
 			}
 			retcmd = exe_cmd(cmd);
 			if (retcmd != NULL)
