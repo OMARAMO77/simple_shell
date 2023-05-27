@@ -1,39 +1,7 @@
 #include "shell.h"
-int check_word(const char *cmd, const char *word);
-int exithsh(char *cmd);
+void exithsh(char *cmd);
 void envcmd(void);
 void errmsg2(char *hsh, int cmdnum, char *cmd, char *status);
-/**
- * check_word - aa
- * @cmd: aa
- * @word: aa
- *
- * Return: aa
- */
-
-int check_word(const char *cmd, const char *word)
-{
-	const char *ptr = cmd;
-	const char *cmd_ptr;
-	const char *word_ptr;
-
-	while (*ptr)
-	{
-		cmd_ptr = ptr;
-		word_ptr = word;
-
-		while (*cmd_ptr && *word_ptr && *cmd_ptr == *word_ptr)
-		{
-			cmd_ptr++;
-			word_ptr++;
-		}
-		if (!*word_ptr)
-			return 1;
-
-		ptr++;
-	}
-	return 0;
-}
 /**
  * errmsg2 - aa
  * @hsh: aa
@@ -82,26 +50,18 @@ void envcmd(void)
  *
  * Return: nothing
  */
-int exithsh(char *cmd)
+void exithsh(char *cmd)
 {
 	int status;
 
-	if (_strcmp(cmd, "exit\n") == 0)
-		exit(0);
-	else if (_strncmp(cmd, "exit ", 5) == 0)
+	status = _atoi(cmd + 5);
+	if (status == 0)
 	{
-		status = _atoi(cmd + 5);
-		if (status == 0)
-		{
-			errmsg2("./hsh", 1, "exit", cmd + 5);
-			exit(2);
-		}
-		else
-			exit(status);
+		errmsg2("./hsh", 1, "exit", cmd + 5);
+		exit(2);
 	}
 	else
-		return (2);
-
+		exit(status);
 }
 
 /**
@@ -157,10 +117,12 @@ int main(int argc, char **argv, char **env)
 			}
 			else if (emp_str(cmd))
 				continue;
-			else if (check_word(cmd, "exit"))
+			else if (_strcmp(cmd, "exit\n") == 0)
+				break;
+			else if (_strncmp(cmd, "exit ", 5) == 0)
 			{
-				if (exithsh(cmd) != 2)
-					break;
+				exithsh(cmd);
+				break;
 			}
 			retcmd = exe_cmd(cmd);
 			if (retcmd != NULL)
