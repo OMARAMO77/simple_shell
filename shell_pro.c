@@ -1,6 +1,52 @@
 #include "shell.h"
 void envcmd(void);
 void errmsg2(char *hsh, int cmdnum, char *cmd, char *status);
+char *semcolexe(char *cmd);
+
+/**
+  * semcolexe - aa
+  * @cmd: aa
+  *
+  * Return: aa
+  */
+char *semcolexe(char *cmd)
+{
+    char *tok, *path;
+	pid_t pid;
+	char *args[14];
+	char **env;
+
+	env = environ;
+    tok = strtok(cmd, " ;");	/*Split the command by semicolons (;)*/
+    while (tok != NULL)
+    {
+        pid = fork();
+        if (pid < 0)
+        {
+            perror("fork error");
+            return (NULL);
+        }
+        else if (pid == 0)
+        {
+            args[0] = tok;
+			args[1] = NULL;
+			if (check_path(args[0], '/'))
+				path = args[0];
+			else
+				path = path_to(args[0]);
+			if (access(path, X_OK) == 0)
+			{
+				execve(path, args, env);
+				perror("execve error");
+			}
+        }
+        else
+            wait(NULL);
+        tok = strtok(NULL, " ;");	/* next command */
+    }
+	return (NULL);
+}
+
 /**
  * errmsg2 - aa
  * @hsh: aa
@@ -73,7 +119,7 @@ void prompt(void)
 int main(int argc, char **argv, char **env)
 {
 	int i, cmdnum = 0, status;
-	char *retcmd, *path, *cmd = NULL;
+	char *retcmd, *retsem, *path, *cmd = NULL;
 	size_t buffSize = 0;
 	ssize_t bytesRead;
 	char buffer[98];
@@ -109,6 +155,13 @@ int main(int argc, char **argv, char **env)
 				else
 					exit(status);
 			}
+			else if (check_path(cmd, ';'))
+			{
+				retsem = semcolexe(cmd);
+				if (retsem != NULL)
+					errmsg(argv[0], cmdnum, retsem);
+			}
+
 			retcmd = exe_cmd(cmd);
 			if (retcmd != NULL)
 				errmsg(argv[0], cmdnum, retcmd);
