@@ -1,20 +1,57 @@
 #include "shell.h"
-
-void exithsh(char *cmd);
+int check_word(const char *cmd, const char *word);
+int exithsh(char *cmd);
 void envcmd(void);
 void errmsg2(char *hsh, int cmdnum, char *cmd, char *status);
+/**
+ * check_word - aa
+ * @cmd: aa
+ * @word: aa
+ *
+ * Return: aa
+ */
+
+int check_word(const char *cmd, const char *word)
+{
+	const char *ptr = cmd;
+	const char *cmd_ptr;
+	const char *word_ptr;
+
+	while (*ptr)
+	{
+		cmd_ptr = ptr;
+		word_ptr = word;
+
+		while (*cmd_ptr && *word_ptr && *cmd_ptr == *word_ptr)
+		{
+			cmd_ptr++;
+			word_ptr++;
+		}
+		if (!*word_ptr)
+			return 1;
+
+		ptr++;
+	}
+	return 0;
+}
+/**
+ * errmsg2 - aa
+ * @hsh: aa
+ * @cmdnum: aa
+ * @cmd: aa
+ * @status: aa
+ *
+ * Return: aa
+ */
 
 void errmsg2(char *hsh, int cmdnum, char *cmd, char *status)
 {
 	char num1;
 
+	num1 = cmdnum + '0';
 	write(STDERR_FILENO, hsh, _strlen(hsh));
 	write(STDERR_FILENO, ": ", 2);
-	if (cmdnum < 10)
-	{
-		num1 = cmdnum + '0';
-		write(STDERR_FILENO, &num1, 1);
-	}	
+	write(STDERR_FILENO, &num1, 1);
 	write(STDERR_FILENO, ": ", 2);
 	write(STDERR_FILENO, cmd, _strlen(cmd));
 	write(STDERR_FILENO, ": Illegal number: ", 18);
@@ -44,7 +81,7 @@ void envcmd(void)
  *
  * Return: nothing
  */
-void exithsh(char *cmd)
+int exithsh(char *cmd)
 {
 	int status;
 
@@ -56,11 +93,14 @@ void exithsh(char *cmd)
 		if (status == 0)
 		{
 			errmsg2("./hsh", 1, "exit", cmd + 5);
-			return;
+			exit(2);
 		}
 		else
 			exit(status);
 	}
+	else
+		return (2);
+
 }
 
 /**
@@ -116,10 +156,10 @@ int main(int argc, char **argv, char **env)
 			}
 			else if (emp_str(cmd))
 				continue;
-			else if (_strncmp(cmd, "exit ", 5) == 0 ||_strcmp(cmd, "exit\n") == 0)
+			else if (check_word(cmd, "exit"))
 			{
-				exithsh(cmd);
-				break;
+				if (exithsh(cmd) != 2)
+					break;
 			}
 			retcmd = exe_cmd(cmd);
 			if (retcmd != NULL)
