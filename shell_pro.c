@@ -56,6 +56,7 @@ void errmsg2(char *hsh, int cmdnum, char *cmd, char *status)
 	write(STDERR_FILENO, cmd, _strlen(cmd));
 	write(STDERR_FILENO, ": Illegal number: ", 18);
 	write(STDERR_FILENO, status, _strlen(status));
+	write(STDERR_FILENO, "\n", 1);
 }
 
 /**
